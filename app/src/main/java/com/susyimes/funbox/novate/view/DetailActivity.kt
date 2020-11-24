@@ -3,6 +3,7 @@ package com.susyimes.funbox.novate.view
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.susyimes.funbox.novate.base.BaseActivity
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 
 
 class DetailActivity : BaseActivity() {
-    private val detailVM by lazy { ViewModelProviders.of(this)[DetailVM::class.java] }
+    private val detailVM by lazy { ViewModelProvider(this)[DetailVM::class.java] }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding =
@@ -48,7 +49,11 @@ class DetailActivity : BaseActivity() {
                     val fromPos = viewHolder.adapterPosition
                     val toPos = target.adapterPosition
                     // move item in `fromPos` to `toPos` in adapter.
+                    val removeAt = detailVM.arrayList.removeAt(viewHolder.adapterPosition)
+                    detailVM.arrayList.add(toPos,removeAt)
+
                     contentAdapter.notifyItemMoved(fromPos,toPos)
+
 
                     return true// true if moved, false otherwise
                 }

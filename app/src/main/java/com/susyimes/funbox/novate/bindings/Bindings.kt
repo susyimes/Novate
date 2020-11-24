@@ -14,5 +14,5 @@ fun setNoteItems(listView: RecyclerView, items: List<Note>?) {
 
 @BindingAdapter("app:content_items")
 fun setContentItems(listView: RecyclerView, items: List<Content>?) {
-    (listView.adapter as ContentAdapter).submitList(items)
+    (listView.adapter as ContentAdapter).setList(items)
 }
